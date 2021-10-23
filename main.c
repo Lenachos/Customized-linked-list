@@ -1,7 +1,6 @@
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "tp3.h"
-#include "tp3.c"
 int main() {
     char choixMenu = '0' ;
     t_mot *tete = NULL;
@@ -26,13 +25,18 @@ int main() {
             case '2' :
                 printf("\n\n\t<Faire Ajouter un mot dans un lexique>\n\n");
                 printf("\n\n\t<Entrez le mot:>\n\n");
-                char nouveau_mot[20]="\0";
-                gets(nouveau_mot);
-                tete = ajouterMot(tete,nouveau_mot);
+                char nouveau_mot1[20]="\0";
+                gets(nouveau_mot1);
+                tete = ajouterMot(tete,nouveau_mot1);
                 afficherMots(tete);
                 break;
             case '3' :
                 printf("\n\n\t<Faire Retirer un mot d'un lexique>\n\n");
+                printf("\n\n\t<Entrez le mot pour retirer:>\n\n");
+                char nouveau_mot2[20]="\0";
+                gets(nouveau_mot2);
+                tete = retirerMot(tete,nouveau_mot2);
+                afficherMots(tete);
                 break;
             case '4' :
                 printf("\n\n\t<Faire Fusionner deux lexiques>\n\n");
@@ -42,9 +46,6 @@ int main() {
                 break;
         }
     } while (choixMenu != '6');
-
-
     printf("\n\n*** FIN DU PROGRAMME ***\n");
-
     return 0;
 }
