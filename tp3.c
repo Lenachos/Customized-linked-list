@@ -1,8 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <ctype.h>
-#include "tp3.h"
+#include "BaseList.h"
 
 // Création nouvel élément
 t_mot *creerMot(char *mot) {
