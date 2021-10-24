@@ -100,55 +100,21 @@ void afficherMots(t_mot *liste,int ID){
 
 // Fusion listes
 t_mot *fusionner(t_mot *listeA, t_mot *listeB){
-    t_mot *ptrA = listeA;
-    t_mot *ptrB = listeB;
     t_mot *temp = NULL;
-    t_mot *newHeadPtr = listeA;
-    t_mot newHead;
-
-    if(listeA == NULL){
-        newHeadPtr = listeB;
-        listeB = NULL;
-        return newHeadPtr;
-    }
-    else if(listeB == NULL){
+    t_mot *newHeader = NULL;
+    if(listeB == NULL){
         return listeA;
     }
-
-    while(ptrA!=NULL && ptrB!=NULL){
-        if(strcmp(ptrA->mot,ptrB->mot)<0){
-//                inserer apres Node A
-            temp = ptrA;
-            ptrA = ptrA->suivant;
-        }
-        else if(strcmp(ptrA->mot,ptrB->mot)>0){
-            if(temp == NULL){
-                newHeadPtr = ptrB;
-                ptrB = ptrB->suivant;
-                newHeadPtr->suivant = ptrA;
-                temp = newHeadPtr;
-            }
-            else{
-                temp->suivant = ptrB;
-                temp = ptrB;
-                ptrB = ptrB->suivant;
-                temp->suivant = ptrA;
-            }
-//                inserer avant Node A
-        }
-        else{
-            ptrA->nombre_occurences += ptrB->nombre_occurences;
-            temp = ptrB;
-            ptrB = ptrB->suivant;
-            free(temp);
-            ptrA = ptrA->suivant;
-        }
+    char a[1];
+    a[0] = '-';
+    if(listeA == NULL){
+        temp = creerMot(a);
+        temp->suivant = listeB;
+        listeB = temp;
+        newHeader = temp->suivant;
+        free(listeB);
+        return newHeader;
     }
-    if(ptrB == NULL){
-        return newHeadPtr;
-    }
-    temp->suivant = ptrB;
-    return newHeadPtr;
     // à remplacer par le code la fonctino
 }
 /* ====== FIN fusionner ====== */
