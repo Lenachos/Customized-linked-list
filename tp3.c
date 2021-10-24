@@ -1,5 +1,5 @@
 #include <ctype.h>
-#include "BaseList.h"
+#include "tp3.h"
 
 // Création nouvel élément
 t_mot *creerMot(char *mot) {
@@ -77,14 +77,14 @@ t_mot *retirerMot(t_mot *liste, char *mot) {
 /* ====== FIN ajouterMot ====== */
 
 // Affichage mots d'un lexique
-void afficherMots(t_mot *liste){
+void afficherMots(t_mot *liste,int ID){
     t_mot *courant = liste;
     if(liste == NULL){
-        printf("\n\n\tLA LISTE EST VIDE\n\n");
+        printf("\n\n\tLA LISTE ID(%d) EST VIDE\n\n",ID);
         return;
     }
     char prefixe = '-';
-    printf("\n\n==================");
+    printf("\n\n==================\nID(%d)",ID);
     while(courant != NULL){
         if(courant->mot[0] == prefixe){
             printf("\n    --- %s [%d]",courant->mot,courant->nombre_occurences);
@@ -100,7 +100,56 @@ void afficherMots(t_mot *liste){
 
 // Fusion listes
 t_mot *fusionner(t_mot *listeA, t_mot *listeB){
-    return NULL; // à remplacer par le code la fonctino
+    t_mot *ptrA = listeA;
+    t_mot *ptrB = listeB;
+    t_mot *temp = NULL;
+    t_mot *newHeadPtr = listeA;
+    t_mot newHead;
+
+    if(listeA == NULL){
+        newHeadPtr = listeB;
+        listeB = NULL;
+        return newHeadPtr;
+    }
+    else if(listeB == NULL){
+        return listeA;
+    }
+
+    while(ptrA!=NULL && ptrB!=NULL){
+        if(strcmp(ptrA->mot,ptrB->mot)<0){
+//                inserer apres Node A
+            temp = ptrA;
+            ptrA = ptrA->suivant;
+        }
+        else if(strcmp(ptrA->mot,ptrB->mot)>0){
+            if(temp == NULL){
+                newHeadPtr = ptrB;
+                ptrB = ptrB->suivant;
+                newHeadPtr->suivant = ptrA;
+                temp = newHeadPtr;
+            }
+            else{
+                temp->suivant = ptrB;
+                temp = ptrB;
+                ptrB = ptrB->suivant;
+                temp->suivant = ptrA;
+            }
+//                inserer avant Node A
+        }
+        else{
+            ptrA->nombre_occurences += ptrB->nombre_occurences;
+            temp = ptrB;
+            ptrB = ptrB->suivant;
+            free(temp);
+            ptrA = ptrA->suivant;
+        }
+    }
+    if(ptrB == NULL){
+        return newHeadPtr;
+    }
+    temp->suivant = ptrB;
+    return newHeadPtr;
+    // à remplacer par le code la fonctino
 }
 /* ====== FIN fusionner ====== */
 
@@ -115,4 +164,15 @@ t_mot *importerFichier(t_mot *liste){
 void viderBuffer() {
     int c = '0';
     while (c!='\n' && c != EOF) { c = getchar(); }
+}
+
+void resetArray(t_mot **para1,int* para2,int len){
+    for(int i = 0;i<len;i++){
+        para2[i] = 0;
+        para1[i] = NULL;
+    }
+    for(int i = 0;i<len;i++){
+        printf("%d",*(para2+i));
+    }
+    printf("\n");
 }
