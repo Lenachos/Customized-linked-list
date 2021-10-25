@@ -99,26 +99,56 @@ void afficherMots(t_mot *liste,int ID){
 /* ====== FIN afficherMots ====== */
 
 // Fusion listes
-t_mot *fusionner(t_mot *listeA, t_mot *listeB){
-    t_mot *temp = NULL;
-    t_mot *newHeader = NULL;
-    if(listeB == NULL){
+t_mot *fusionnerON(t_mot *listeA, t_mot *listeB){
+
+    if(listeB ==NULL){
         return listeA;
     }
-    char a[1];
-    a[0] = '-';
     if(listeA == NULL){
-        temp = creerMot(a);
-        temp->suivant = listeB;
-        listeB = temp;
-        newHeader = temp->suivant;
-        free(listeB);
-        return newHeader;
+        return listeB;
     }
+
+    t_mot *ptrA = listeA;
+    t_mot *ptrB = listeB;
+    t_mot *temp = NULL;
+    t_mot *precedentPtrA = NULL;
+    while(ptrA!=NULL&& ptrB!=NULL){
+        if(strcmp(ptrA->mot,ptrB->mot) == 0){
+            temp = ptrB;
+            ptrB = ptrB->suivant;
+            ptrA->nombre_occurences += temp->nombre_occurences;
+            precedentPtrA = ptrA;
+            ptrA = ptrA->suivant;
+            free(temp);
+        }
+        else if(strcmp(ptrA->mot,ptrB->mot) > 0){
+            temp = ptrB;
+            ptrB = ptrB->suivant;
+            if(precedentPtrA == NULL){
+                listeA = temp;
+                listeA->suivant = ptrA;
+            }
+            else{
+                precedentPtrA->suivant = temp;
+                temp->suivant = ptrA;
+            }
+            precedentPtrA = temp;
+            continue;
+        }
+        else{
+            precedentPtrA = ptrA;
+            ptrA = ptrA->suivant;
+        }
+    }
+
+    if(ptrA == NULL){
+        precedentPtrA->suivant = ptrB;
+    }
+    return listeA;
+
     // à remplacer par le code la fonctino
 }
 /* ====== FIN fusionner ====== */
-
 
 // Import fichier de mots dans une liste
 t_mot *importerFichier(t_mot *liste){

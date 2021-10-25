@@ -61,7 +61,11 @@ int main() {
                 printf("Fusionner quelle lexique?\n");
                 int listID_2 = getchar()-48;
                 viderBuffer();
-                lexiques[listID_1] = fusionner(lexiques[listID_1], lexiques[listID_2]);
+                lexiques[listID_1] = fusionnerON(lexiques[listID_1], lexiques[listID_2]);
+
+//                il est obligatoire de reattribuer lexiques[listID_2] dehors de function!
+                lexiques[listID_2] = NULL;
+
                 afficherMots(lexiques[listID_1],listID_1);
                 break;
             case '5' :

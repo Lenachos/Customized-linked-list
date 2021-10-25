@@ -23,7 +23,9 @@ t_mot *retirerMot(t_mot *liste, char *mot);
 
 void afficherMots(t_mot *liste,int ID);
 
-t_mot *fusionner(t_mot *listeA, t_mot *listeB);
+t_mot *fusionnerON(t_mot *listeA, t_mot *listeB);
+
+t_mot *fusionnerO1(t_mot *listeA, t_mot *listeB);
 
 t_mot *importerFichier(t_mot *liste);
 
