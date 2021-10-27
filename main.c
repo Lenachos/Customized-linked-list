@@ -1,6 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "tp3.h"
+#include "tp3.c"
+#define MAX_NUM_LEXIQUE 20
+
+//lexique lequel on choisi
+int listID = 0;
+
+//listPtr est toujours pointee vers le liste target
+t_mot *lexiques[MAX_NUM_LEXIQUE];
+int isExist[MAX_NUM_LEXIQUE];
 
 int main() {
     char choixMenu = '0' ;
@@ -21,18 +30,60 @@ int main() {
         switch (choixMenu) {
             case '1' :
                 printf("\n\n\t<Faire Afficher un lexique>\n\n");
+                printf("Afficher quelle lexique?\n");
+                listID = getchar()-48;
+                viderBuffer();
+                afficherMots(lexiques[listID],listID);
                 break;
+
             case '2' :
                 printf("\n\n\t<Faire Ajouter un mot dans un lexique>\n\n");
+                printf("Ajouter quelle lexique?\n");
+                listID = getchar()-48;
+                viderBuffer();
+                printf("\n\n\t<Entrez le mot:>\n\n");
+                char nouveau_mot1[20]="\0";
+                gets(nouveau_mot1);
+                lexiques[listID] = ajouterMot(lexiques[listID],nouveau_mot1);
+                afficherMots(lexiques[listID],listID);
                 break;
+
             case '3' :
                 printf("\n\n\t<Faire Retirer un mot d'un lexique>\n\n");
+                printf("Retirer dans quelle lexique?\n");
+                listID = getchar()-48;
+                viderBuffer();
+                printf("\n\n\t<Entrez le mot pour retirer:>\n\n");
+                char nouveau_mot2[20]="\0";
+                gets(nouveau_mot2);
+                lexiques[listID] = retirerMot(lexiques[listID],nouveau_mot2);
+                afficherMots(lexiques[listID],listID);
                 break;
-            case '4' :
+
+             case '4' :
                 printf("\n\n\t<Faire Fusionner deux lexiques>\n\n");
+                printf("Fusionner quelle lexique?\n");
+                int listID_1 = getchar()-48;
+                viderBuffer();
+                printf("Fusionner quelle lexique?\n");
+                int listID_2 = getchar()-48;
+                viderBuffer();
+                lexiques[listID_1] = fusionnerON(lexiques[listID_1], lexiques[listID_2]);
+
+//                il est obligatoire de reattribuer lexiques[listID_2] dehors de function!
+                lexiques[listID_2] = NULL;
+
+                afficherMots(lexiques[listID_1],listID_1);
                 break;
+
             case '5' :
                 printf("\n\n\t<Faire Charger un fichier dans un lexique>\n\n");
+                printf("Charger dans quel lexique?\n");
+                listID = getchar()-48;
+                viderBuffer();
+                lexiques[listID]=importerFichier(lexiques[listID]);
+                afficherMots(lexiques[listID],listID);
+                printf("après afficher mot\n");
                 break;
         }
     } while (choixMenu != '6');
@@ -42,3 +93,4 @@ int main() {
 
     return 0;
 }
+//C:\\Users\\lenab\\OneDrive\\Documents\\UTC\\A21\\NF16\\TP\\TP03_NF16\\tp3\\tp3\\test.txt

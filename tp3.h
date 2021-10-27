@@ -9,6 +9,10 @@ struct s_mot {
 
 typedef struct s_mot t_mot;
 
+//struct Lexique {
+//    t_mot* premier
+//};
+//typedef struct Lexique lexique;
 
 t_mot *creerMot(char *mot);
 
@@ -16,7 +20,7 @@ t_mot *ajouterMot(t_mot *liste, char *mot);
 
 t_mot *retirerMot(t_mot *liste, char *mot);
 
-void afficherMots(t_mot *liste);
+void afficherMots(t_mot *liste,int ID);
 
 t_mot *fusionner(t_mot *listeA, t_mot *listeB);
 
