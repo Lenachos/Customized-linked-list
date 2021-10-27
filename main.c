@@ -87,8 +87,6 @@ int main() {
                 break;
         }
     } while (choixMenu != '6');
-
-
     printf("\n\n*** FIN DU PROGRAMME ***\n");
 
     return 0;

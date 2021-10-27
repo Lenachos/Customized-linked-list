@@ -123,10 +123,11 @@ t_mot *fusionner(t_mot *listeA, t_mot *listeB){
 t_mot *importerFichier(t_mot *liste){
     FILE *fp=NULL;
     char* mot;
-    char nomFichier;
+    char a[30];
+    char *nomFichier = a;
     printf("Entrez le chemin du fichier (avec double-slash comme séparateur)\n");
 
-    scanf("%s",&nomFichier); //lit avec les espaces
+    scanf("%s",nomFichier); //lit avec les espaces
     printf("%s",nomFichier);
 
     fp = fopen(nomFichier, "r");
