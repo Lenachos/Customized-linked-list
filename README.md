@@ -1,7 +1,7 @@
 # NF16_TP3
 29/10/2021 2:22
 
-1)Changer char mot[length] en char* mot
+1)Changer char mot[length] en char* mot  
 2)Remplacer strcmp par strdup dans fonction "creerMot()"  
 3)Ajouter "free(courant->mot)" dans fonction "retirerMot()"  
 4)Corriger la fonction "importerFichier()"  
