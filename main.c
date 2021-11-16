@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "tp3.c"
+#include "tp3.h"
 
 int lexiqueID = 0;//lexique qu'on choisit
 t_mot *lexiques[MAX_NUM_LEXIQUE];//listPtr est toujours pointée vers la liste target
