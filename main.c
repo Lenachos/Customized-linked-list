@@ -1,10 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "tp3.h"
-
-int lexiqueID = 0;//lexique qu'on choisit
-t_mot *lexiques[MAX_NUM_LEXIQUE];//listPtr est toujours pointée vers la liste target
-
 int main() {
     char choixMenu = '0' ;
 
@@ -24,7 +17,7 @@ int main() {
             case '1' :
                 printf("\n\n\t<Faire Afficher un lexique>");
                 printf("\n\n\t<Afficher quel lexique?>");
-                lexiqueID = getlexique();//Pour juger si le lexique a dépassé la limite
+                lexiqueID = getlexique();//Pour juger si le lexique a dï¿½passï¿½ la limite
                 if(lexiqueID != -1)
                     afficherMots(lexiques[lexiqueID],lexiqueID);
                 break;
@@ -63,10 +56,10 @@ int main() {
             {
                 int lexiqueID_1,lexiqueID_2;
                 printf("\n\n\t<Faire Fusionner deux lexiques>");
-                printf("\n\n\t<Entrer ID du 1ér lexique:>");
+                printf("\n\n\t<Entrer ID du 1ï¿½r lexique:>");
                 scanf("%d",&lexiqueID_1);
                 viderBuffer();
-                printf("\n\t<Entrer ID du 2ème lexique:>");
+                printf("\n\t<Entrer ID du 2ï¿½me lexique:>");
                 scanf("%d",&lexiqueID_2);
                 viderBuffer();
                 lexiques[lexiqueID_1] = fusionner(lexiques[lexiqueID_1], lexiques[lexiqueID_2]);
@@ -80,7 +73,7 @@ int main() {
                 lexiqueID = getlexique();
                 if(lexiqueID != -1){
                     lexiques[lexiqueID]=importerFichier(lexiques[lexiqueID]);
-                    printf("\n\t<Après charger:>\n\n");
+                    printf("\n\t<Aprï¿½s charger:>\n\n");
                     afficherMots(lexiques[lexiqueID],lexiqueID);
                 }
                 break;
